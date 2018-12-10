@@ -9,7 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock x:Name="TimerLog" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="200"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="207*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource MyTextblockStyle}" x:Name="TimerLog" HorizontalAlignment="Left" VerticalAlignment="Center" Width="600" Height="400" RequestedTheme="Default" FocusVisualSecondaryBrush="#994D099E" Margin="95,0,0,0" Grid.Column="1"/>
+        <Frame HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button x:Name="starttimer" Style="{StaticResource MyButtonStyle}" Content="Start Timer" HorizontalAlignment="Center" Margin="10,10,0,10" VerticalAlignment="Center" Click="Button_Click"/>
+        </Frame>
+        <Button x:Name="stoptimer" Style="{StaticResource MyButtonStyle}" Content="Stop timer" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="103,10,57,0"/>
 
     </Grid>
 </Page>

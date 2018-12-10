@@ -108,5 +108,15 @@ namespace clockUIFinal
 
 
         }
+     /*   
+        private void Page_Loading(FrameworkElement sender, object args)
+        {
+            DispatcherTimerSetup(); //Start timer on button click
+        }
+*/
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DispatcherTimerSetup(); //Start timer on button click
+        }
     }
 }
