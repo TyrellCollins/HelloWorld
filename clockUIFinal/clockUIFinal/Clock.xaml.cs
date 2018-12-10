@@ -23,7 +23,7 @@ namespace clockUIFinal
     public sealed partial class ClockPage : Page
     {
         DispatcherTimer Timer = new DispatcherTimer(); //create new instance of dispatch timer
-
+        //DispatcherTimer Stopwatch = new DispatcherTimer(); //create new instance of dispatch timer
         public ClockPage()
         {
             InitializeComponent();
