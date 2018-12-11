@@ -88,13 +88,13 @@
                 <Button x:Name="setAlarm" Content="Set Alarm" Width="80" Height="Auto" VerticalAlignment="Top" Margin="30,10,0,0" HorizontalAlignment="Left" Click="SetalarmButton_Click"/>
                 <TextBlock Text="Stopwatch" TextWrapping="Wrap"/>
                 <TextBlock x:Name="Timertimer" Text="" TextWrapping="Wrap"/>
-                <Button Content="Start" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="Button_Click_2"/>
-                <Button Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="Button_Click_1"/>
+                <Button x:Name="startstopwatch" Content="Start" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="Startstopwatch_Click"/>
+                <Button x:Name="stopstopwatch" Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="Stopstopwatch_Click"/>
                 <TextBlock Text="Debug" TextWrapping="Wrap" Margin="20,20,0,10"/>
                 <TextBlock x:Name="TimerLog" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,10"/>
 
                 <Button x:Name="stopDebug" Style="{StaticResource MyButtonStyle}" Content="Stop Debugging" HorizontalAlignment="Left" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" Width="126" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="20,0,20,8" Click="StopDebug_Click"/>
-                <Button x:Name="startDebug" Style="{StaticResource MyButtonStyle}" Content="Start Debugging" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Bottom" Click="Button_Click" HorizontalContentAlignment="Left" Margin="20,0,20,0"/>
+                <Button x:Name="startDebug" Style="{StaticResource MyButtonStyle}" Content="Start Debugging" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Bottom" Click="Startdebug_Click" HorizontalContentAlignment="Left" Margin="20,0,20,0"/>
 
 
             </StackPanel>
