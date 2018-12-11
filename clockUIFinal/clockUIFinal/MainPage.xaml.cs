@@ -39,6 +39,8 @@ namespace clockUIFinal
 
         private CancellationTokenSource ReadCancellationTokenSource;
 
+        DispatcherTimer Timer = new DispatcherTimer(); //create new instance of dispatch timer
+        //DispatcherTimer Stopwatch = new DispatcherTimer(); //create new instance of dispatch timer
 
         string received = "";
 
@@ -47,7 +49,17 @@ namespace clockUIFinal
             this.InitializeComponent();
             listOfDevices = new ObservableCollection<DeviceInformation>();
             ListAvailablePorts();
+            DataContext = this;
+            Timer.Tick += Timer_Tick;
+            Timer.Interval = new TimeSpan(0, 0, 1); //1 second interval
+            Timer.Start(); //start timer
         }
+
+        private void Timer_Tick(object sender, object e)
+        {
+            Time.Text = DateTime.Now.ToString("h:mm:ss tt"); //Displays system time as a string in textblock
+        }
+
         private async void ListAvailablePorts()
         {
             try
@@ -233,7 +245,7 @@ namespace clockUIFinal
             {
                 var dataPacket = txtSend.Text.ToString();
                 dataWriterObject = new DataWriter(serialPort.OutputStream);
-                await sendPacket(dataPacket);
+                await SendPacket(dataPacket);
 
                 if (dataWriterObject != null)
                 {
@@ -244,7 +256,7 @@ namespace clockUIFinal
             }
         }
 
-        private async Task sendPacket(string value)
+        private async Task SendPacket(string value)
         {
             var dataPacket = value;
 
