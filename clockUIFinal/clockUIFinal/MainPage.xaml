@@ -13,6 +13,7 @@
                 <Button x:Name="ButtonConnectToDevice" Content="Connect to device"
                     Margin="10,10,0,0" Click = "ButtonConnectToDevice_Click"/>
                 <Button x:Name="ButtonWrite" Content="Write" Margin="10,10,0,0" Click="ButtonWrite_Click"/>
+                <Button x:Name="ButtonDisconnect" Content="Disconnect" Margin="10,10,0,0" Click="ButtonDisconnect_Click"/>
             </StackPanel>
             <TextBlock Text="Select a Serial Device:" Margin="20,0,0,0"/>
             <ListBox x:Name="lstSerialDevices" Height="100" Margin="10,0,30,0" Padding="0,0,30,0">
@@ -79,10 +80,10 @@
         </StackPanel>
 
         <Grid>
-            <StackPanel x:Name="Functions" HorizontalAlignment="Left" Height="720" VerticalAlignment="Center" Width="375">
-                <TextBlock x:Name="Localtime" HorizontalAlignment="Left" Text="Local Time:" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,20,0,10"/>
+            <StackPanel x:Name="Functions" HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="375">
+                <TextBlock x:Name="Localtime" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,20,0,10"/>
                 <TextBlock x:Name="RTC" HorizontalAlignment="Left" Width="308" Height="32" Margin="10,0,-2,0"/>
-                <TextBlock x:Name="AlarmTime" HorizontalAlignment="Left" Text="No Alarm Set" TextWrapping="Wrap" VerticalAlignment="Top" Margin="30,10,0,0" Width="200" Height="54"/>
+                <TextBlock x:Name="AlarmTime" HorizontalAlignment="Left" Text="No Alarm Set" TextWrapping="Wrap" VerticalAlignment="Top" Margin="30,10,0,0" Width="200" Height="54" SelectionChanged="AlarmTime_TextChanged"/>
                 <TextBlock x:Name="Instructions" Text="Enter time for alarm to go off in this format  HH:MM:SS:TT ~~ Hour:Minute:Second:Am/PM~~~"  TextWrapping="Wrap" Width="330" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0"/>
                 <TextBox x:Name="Alarmset" HorizontalAlignment="Left" Text="Enter time here" Margin="30,10,0,0" Width="191" TextChanged="Alarmset_TextChanged"/>
                 <Button x:Name="setAlarm" Content="Set Alarm" Width="80" Height="Auto" VerticalAlignment="Top" Margin="30,10,0,0" HorizontalAlignment="Left" Click="SetalarmButton_Click"/>
@@ -92,9 +93,8 @@
                 <Button x:Name="stopstopwatch" Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="Stopstopwatch_Click"/>
                 <TextBlock Text="Debug" TextWrapping="Wrap" Margin="20,20,0,10"/>
                 <TextBlock x:Name="TimerLog" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,10"/>
-
-                <Button x:Name="stopDebug" Style="{StaticResource MyButtonStyle}" Content="Stop Debugging" HorizontalAlignment="Left" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" Width="126" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="20,0,20,8" Click="StopDebug_Click"/>
                 <Button x:Name="startDebug" Style="{StaticResource MyButtonStyle}" Content="Start Debugging" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Bottom" Click="Startdebug_Click" HorizontalContentAlignment="Left" Margin="20,0,20,0"/>
+                <Button x:Name="stopDebug" Style="{StaticResource MyButtonStyle}" Content="Stop Debugging" HorizontalAlignment="Left" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom" Width="126" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="20,0,0,8" Click="StopDebug_Click"/>
 
 
             </StackPanel>
