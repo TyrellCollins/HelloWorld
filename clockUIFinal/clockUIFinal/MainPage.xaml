@@ -81,16 +81,17 @@
 
         <Grid>
             <StackPanel x:Name="Functions" HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="375">
-                <TextBlock x:Name="Localtime" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,20,0,10"/>
-                <TextBlock x:Name="RTC" HorizontalAlignment="Left" Width="308" Height="32" Margin="10,0,-2,0"/>
-                <TextBlock x:Name="AlarmTime" HorizontalAlignment="Left" Text="No Alarm Set" TextWrapping="Wrap" VerticalAlignment="Top" Margin="30,10,0,0" Width="200" Height="54" SelectionChanged="AlarmTime_TextChanged"/>
-                <TextBlock x:Name="Instructions" Text="Enter time for alarm to go off in this format  HH:MM:SS:TT ~~ Hour:Minute:Second:Am/PM~~~"  TextWrapping="Wrap" Width="330" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0"/>
-                <TextBox x:Name="Alarmset" HorizontalAlignment="Left" Text="Enter time here" Margin="30,10,0,0" Width="191" TextChanged="Alarmset_TextChanged"/>
-                <Button x:Name="setAlarm" Content="Set Alarm" Width="80" Height="Auto" VerticalAlignment="Top" Margin="30,10,0,0" HorizontalAlignment="Left" Click="SetalarmButton_Click"/>
-                <TextBlock Text="Stopwatch" TextWrapping="Wrap"/>
-                <TextBlock x:Name="Timertimer" Text="" TextWrapping="Wrap"/>
-                <Button x:Name="startstopwatch" Content="Start" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="Startstopwatch_Click"/>
-                <Button x:Name="stopstopwatch" Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="Stopstopwatch_Click"/>
+                <TextBlock x:Name="Localtime" Text="Local Time:" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="20,10,0,10"/>
+                <TextBlock x:Name="RTC" Width="308" Height="61" Margin="20,0,20,0" FontSize="24"/>
+                <TextBlock x:Name="AlarmTime" HorizontalAlignment="Left" Text="No Alarm Set" TextWrapping="Wrap" VerticalAlignment="Top" Margin="30,10,0,0" Width="200" Height="54"/>
+                <TextBlock x:Name="Instructions" Text=" Enter time for alarm.  Input format: HH:MM:SS:TT   Hour:Minute:Second Am/PM"  TextWrapping=" Wrap" Width="330" Height="40" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                <TextBox x:Name="Alarmset" HorizontalAlignment="Left" Text="Enter time here" Margin="30,10,0,0" Width="191"/>
+                <Button x:Name="setAlarm" Content="Set Alarm" Width="100" Height="Auto" VerticalAlignment="Top" Margin="30,10,0,0" HorizontalAlignment="Left" Click="SetalarmButton_Click"/>
+                <Button x:Name="Clear_Alarm" Content="Reset Alarm" Margin="30,10,20,10" Width="100" Click="Clear_Alarm_Click"/>
+                <TextBlock x:Name="stopWatchTextbox" Text="Stopwatch" TextWrapping="Wrap" Margin="20,10,20,10"/>
+                <TextBlock x:Name="Timertimer" Text="" TextWrapping="Wrap" HorizontalAlignment="Stretch" Height="31" Margin="20,10,20,10" VerticalAlignment="Stretch" FontSize="18"/>
+                <Button x:Name="startstopwatch" Content="Start" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10,20,0" Click="Startstopwatch_Click"/>
+                <Button x:Name="stopstopwatch" Content="Stop" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10,20,0" Click="Stopstopwatch_Click"/>
                 <TextBlock Text="Debug" TextWrapping="Wrap" Margin="20,20,0,10"/>
                 <TextBlock x:Name="TimerLog" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,10"/>
                 <Button x:Name="startDebug" Style="{StaticResource MyButtonStyle}" Content="Start Debugging" HorizontalAlignment="Left" VerticalAlignment="Center" VerticalContentAlignment="Bottom" Click="Startdebug_Click" HorizontalContentAlignment="Left" Margin="20,0,20,0"/>

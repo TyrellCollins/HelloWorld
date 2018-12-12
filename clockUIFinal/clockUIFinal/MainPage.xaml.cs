@@ -29,7 +29,7 @@ namespace clockUIFinal
         DispatcherTimer StopwatchTimer = new DispatcherTimer(); //create new instance of dispatch timer
 
         string received = "";
-        
+
 
         public MainPage()
         {
@@ -40,123 +40,114 @@ namespace clockUIFinal
             Timer.Tick += Timer_Tick;
             Timer.Interval = new TimeSpan(0, 0, 1); //1 second interval
             Timer.Start(); //start timer
-
-            //StopwatchTimer_Setup();
-
-            //Start Stopwatch 
-            // StopwatchTimer.Tick += StopwatchTimer_Tick;
-            
         }
 
-      //Create structs required for dispatch timer to function
-        DispatcherTimer dispatcherTimer;
-        DateTimeOffset startTime;
-        DateTimeOffset lastTime;
-        DateTimeOffset stopTime;
-        DateTimeOffset previous;
-        DateTimeOffset starttimernow;
-        TimeSpan elapsed, span;
-        Boolean toggleBit;
-        
-        int timesTicked = 1;
-        int timesToTick = 100000000; // only necessary if stopping time
-        int swTicked = 1;
-        int swToTick = 1000000000; // only necessary if stopping time
+        //Create structs required for dispatch timer to function
+        DispatcherTimer dispatcherTimer, stopwatchtime;
+        DateTimeOffset startTime, stopTime, lastTime, previous, starttimernow, stopwatchtimer;
+        TimeSpan elapsed, span, timertotal;
+        Boolean toggleBit, debugActive;
 
+        int timesTicked, swTicked = 1;
+        int timesToTick, swToTick = 100000000; // only necessary if stopping time
 
-            public void DispatcherTimerSetup()
-            {
-                
+        public void DispatcherTimerSetup()
+        {
+
             dispatcherTimer = new DispatcherTimer();
-                dispatcherTimer.Tick += DispatcherTimer_Tick;
-                //dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
-                dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1); //smoother count
-                //dispatcherTimer.Interval = new TimeSpan(0, 0, 1, 0, 0);
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1); //smoother count
 
-                startTime = DateTimeOffset.Now;
+            startTime = DateTimeOffset.Now;
 
-              //  Timertimer.Text = span.ToString(startTime - DateTimeOffset.Now);
-                lastTime = startTime;
-                //~~~TimerLog.Text += "Calling dispatcherTimer.Start()\n";  //for debugging purposes
-                dispatcherTimer.Start();
-
-            }
-    /*
-            public void StopwatchConfig()
-            {
-                DateTimeOffset startwatch = DateTimeOffset.Now;
-                DateTimeOffset stopwatch = DateTimeOffset.Now;
-                TimeSpan StopWatchTotal = stopwatch - startwatch;
-                string counting = StopWatchTotal.ToString();
-                Timertimer.Text = counting;
-
-            }
-
-            public void CalculateTime()
-            {
-
-                DateTime date1, Starttimernow;
-                DateTimeOffset dateOffset1, dateOffset2;
-                TimeSpan difference;
-
-                // Find difference between Date.Now and Date.UtcNow
-                date1 = DateTime.Now;
-               // date2 = DateTime.UtcNow;
-                difference = Starttimernow - date1;
-
-                // Find difference between Now and UtcNow using DateTimeOffset
-                dateOffset1 = DateTimeOffset.Now;
-               // dateOffset2 = DateTimeOffset.UtcNow;
-                difference = dateOffset1 - dateOffset2;
-                Timertimer.Text = difference.ToString();
-            }
-
-    */
-             
-            void DispatcherTimer_Tick(object sender, object e)
-            {
-           
-          
-                DateTimeOffset time = DateTimeOffset.Now;
-                TimeSpan span = time - lastTime;
-
-                lastTime = time;
-
-                timesTicked++;
- 
-
-                if (timesTicked > timesToTick)
+            lastTime = startTime;
+            //~~~TimerLog.Text += "Calling dispatcherTimer.Start()\n";  //for debugging purposes
+            dispatcherTimer.Start();
+        }
+        /*
+                public void StopwatchConfig()
                 {
-                    stopTime = time;
+                    DateTimeOffset startwatch = DateTimeOffset.Now;
+                    DateTimeOffset stopwatch = DateTimeOffset.Now;
+                    TimeSpan StopWatchTotal = stopwatch - startwatch;
+                    string counting = StopWatchTotal.ToString();
+                    Timertimer.Text = counting;
 
-                    //~~TimerLog.Text += "Calling dispatcherTimer.Stop()\n";// for debugging end dispatch timer
-
-                    dispatcherTimer.Stop();
-                    //IsEnabled should now be false after calling stop
-                    //~~~TimerLog.Text += "dispatcherTimer.IsEnabled = " + dispatcherTimer.IsEnabled + "\n"; // for debugging
-
-                    span = stopTime - startTime;
-
-                   TimerLog.Text = "Stop Time: " + span.ToString(); // for debugging
-
-                    //~TimerLog.Text += "Total Time Start-Stop: " + span.ToString() + "\n"; // for debugging
                 }
+
+                public void CalculateTime()
+                {
+
+                    DateTime date1, Starttimernow;
+                    DateTimeOffset dateOffset1, dateOffset2;
+                    TimeSpan difference;
+
+                    // Find difference between Date.Now and Date.UtcNow
+                    date1 = DateTime.Now;
+                   // date2 = DateTime.UtcNow;
+                    difference = Starttimernow - date1;
+
+                    // Find difference between Now and UtcNow using DateTimeOffset
+                    dateOffset1 = DateTimeOffset.Now;
+                   // dateOffset2 = DateTimeOffset.UtcNow;
+                    difference = dateOffset1 - dateOffset2;
+                    Timertimer.Text = difference.ToString();
+                }
+
+        */
+
+        void DispatcherTimer_Tick(object sender, object e)
+        {
+
+            DateTimeOffset time = DateTimeOffset.Now;
+            TimeSpan span = time - lastTime;
+
+            lastTime = time;
+
+            timesTicked++;
+
+
+            if (timesTicked > timesToTick)
+            {
+                stopTime = time;
+
+                //~~TimerLog.Text += "Calling dispatcherTimer.Stop()\n";// for debugging end dispatch timer
+
+                dispatcherTimer.Stop();
+                //IsEnabled should now be false after calling stop
+                //~~~TimerLog.Text += "dispatcherTimer.IsEnabled = " + dispatcherTimer.IsEnabled + "\n"; // for debugging
+
+                span = stopTime - startTime;
+
+                //TimerLog.Text = "Stop Time: " + span.ToString(); // for debugging
+
+                //~TimerLog.Text += "Total Time Start-Stop: " + span.ToString() + "\n"; // for debugging
+            }
+        }
+
+        private void Timer_Tick(object sender, object e)
+        {
+            string text = Alarmset.Text;
+            DateTimeOffset present = DateTimeOffset.Now;
+            TimeSpan elapsed = present - starttimernow;
+
+            RTC.Text = DateTime.Now.ToString("h:mm:ss tt"); //Displays system time as a string in textblock           
+                if (text == RTC.Text)
+                {
+                    Alarmset.Text = "Timer done";
+                    AlarmTime.Text = "Alarm! Buzz!";
+                }
+
+            while (toggleBit == true && debugActive == false)
+            //while (toggleBit == true)
+            {
+                Timertimer.Text = elapsed.ToString("h:mm:ss tt"); //test will edit
             }
 
-            private void Timer_Tick(object sender, object e)
+            while (debugActive == true)
             {
-            
-            RTC.Text = DateTime.Now.ToString("h:mm:ss tt"); //Displays system time as a string in textblock
-
-                DateTimeOffset stopwatchtimer;
-                TimeSpan timertotal;
-                DateTimeOffset present = DateTimeOffset.Now;
-                TimeSpan elapsed = present - starttimernow;
-
-            while(toggleBit==true)
-            { 
-                Timertimer.Text =  elapsed.ToString(); //test will edit
-               }                                                   
+                Timertimer.Text = "Debugging"; //test will edit
+            }
 
 
             swTicked++;
@@ -170,22 +161,21 @@ namespace clockUIFinal
 
                 timertotal = stopwatchtimer - starttimernow;
 
-                Timertimer.Text = "Time since Started: " + timertotal.ToString(); // for debugging
+                Timertimer.Text = "Time Interval:  " + timertotal.ToString(); // for debugging
 
+                if (swToTick == 1)
+                {
+                    Timertimer.Text = "End Time: " + timertotal.ToString(); // for debugging
+                }
             }
-
         }
-
+    
         public void StopwatchTimer_Setup()
         {
-
-
             StopwatchTimer = new DispatcherTimer();
             StopwatchTimer.Interval = new TimeSpan(0, 0, 1);
             starttimernow = DateTimeOffset.Now;
             StopwatchTimer.Start();
-
-
         }
 
         private async void ListAvailablePorts()
@@ -250,7 +240,12 @@ namespace clockUIFinal
                 }
             }
 
-            private async void Listen()
+        private void AlarmTime_TextChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private async void Listen()
             {
                 try
                 {
@@ -279,7 +274,14 @@ namespace clockUIFinal
                 }
 
             }
-            private async Task ReadData(CancellationToken cancellationToken)
+
+        private void Clear_Alarm_Click(object sender, RoutedEventArgs e)
+        {
+            Alarmset.Text = "Enter time here";
+            AlarmTime.Text = "Enter a new time for alarm to sound";
+        }
+
+        private async Task ReadData(CancellationToken cancellationToken)
             {
                 Task<UInt32> loadAsyncTask;
 
@@ -414,61 +416,58 @@ namespace clockUIFinal
 
             private void SetalarmButton_Click(object sender, RoutedEventArgs e)
             {
-                AlarmTime.Text = Alarmset.Text;
-                //AlarmTime.Text = "Alarm set for:  " + Alarmset.Text;
-            }
+                AlarmTime.Text = "Alarm set for: " + Alarmset.Text;
+             }
 
             private void Startdebug_Click(object sender, RoutedEventArgs e)
             {
-                //DispatcherTimerSetup(); //Start debugging on button click
-                swTicked = swToTick + 1; //stop timer function
-                DateTimeOffset startTime = DateTimeOffset.Now;
+              debugActive = true; 
+                if (debugActive == true)
+                {
+                    DispatcherTimerSetup(); //Start debugging on button click
+                    swTicked = swToTick + 1; //stop timer function
+                    DateTimeOffset startTime = DateTimeOffset.Now;
+                stopWatchTextbox.Text = "Testing debug";
+                Timertimer.Text = "Debug Elapsed Time:  " + timertotal.ToString(); // for debugging
+                }
              }
 
-            private void Startstopwatch_Click(object sender, RoutedEventArgs e)
+        private void Startstopwatch_Click(object sender, RoutedEventArgs e)
+        {
+            debugActive = false;
+            if (debugActive == false)
             {
-                swTicked = swToTick + 1; //stop timer function
-                DateTimeOffset stopwatchtimer = DateTimeOffset.Now;
-                Boolean toggleBit = true;
-                StopwatchTimer_Setup(); //Start timer on button click start timer
-             }
-
-
-            private void Stopstopwatch_Click(object sender, RoutedEventArgs e)
+                {
+                    swTicked = swToTick + 1; //stop timer function
+                    DateTimeOffset stopwatchtimer = DateTimeOffset.Now;
+                    Boolean toggleBit = true;
+                    StopwatchTimer_Setup(); //Start timer on button click start timer
+                }
+            }
+        }
+        private void Stopstopwatch_Click(object sender, RoutedEventArgs e)
+        {
+            if (debugActive == false)
             {
                 swTicked = 1; //stop timer function
-             }
-
-            private void StopDebug_Click(object sender, RoutedEventArgs e)
+            }
+        }
+        private void StopDebug_Click(object sender, RoutedEventArgs e)
+        {
+            if (debugActive == true)
             {
-               swTicked = 1; //stop timer function
-               DateTimeOffset stopTime = DateTimeOffset.Now;
-             }
+                DateTimeOffset stopTime = DateTimeOffset.Now;
+                swTicked = 1; //stop timer function
+                
+                debugActive = false;
+            }
+        }
 
             private void ButtonDisconnect_Click(object sender, RoutedEventArgs e)
             {
                 //place holder
             }
-
-            private void AlarmTime_TextChanged(object sender, RoutedEventArgs e)
-            {
-                if (AlarmTime.Text == RTC.Text)
-                {
-                    Alarmset.Text = "Timer done";
-                    AlarmTime.Text = "Alarm! Buzz!";
-
-                }
-            }
-
-        private void Alarmset_TextChanged(object sender, TextChangedEventArgs e)
-        {
-           
-                if (Alarmset.Text != RTC.Text)
-                {
-                    //add error checking here
-                }
-
-            }
+        
         }// end main page
     
     }//end clockui
