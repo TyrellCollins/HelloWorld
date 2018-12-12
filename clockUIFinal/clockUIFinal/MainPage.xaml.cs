@@ -56,7 +56,7 @@ namespace clockUIFinal
         DateTimeOffset previous;
         DateTimeOffset starttimernow;
         TimeSpan elapsed, span;
-
+        Boolean toggleBit;
         
         int timesTicked = 1;
         int timesToTick = 100000000; // only necessary if stopping time
@@ -145,29 +145,21 @@ namespace clockUIFinal
 
             private void Timer_Tick(object sender, object e)
             {
-            Boolean toggleBit = false;
+            
             RTC.Text = DateTime.Now.ToString("h:mm:ss tt"); //Displays system time as a string in textblock
 
                 DateTimeOffset stopwatchtimer;
                 TimeSpan timertotal;
-                // Timertimer.Text = DateTime.ToString("h:mm:ss tt");
-                // DateTimeOffset active = previous;
                 DateTimeOffset present = DateTimeOffset.Now;
-                //TimeSpan span = active - present;
                 TimeSpan elapsed = present - starttimernow;
+
             while(toggleBit==true)
             { 
                 Timertimer.Text =  elapsed.ToString(); //test will edit
-               }                                                   //DateTimeOffset startwatchtimer;
-          
-
-            // previous = present;
-
+               }                                                   
 
 
             swTicked++;
-
-            //Timertimer.Text = "Time:  %s  PM " + elapsed.ToString(); //test will edit
 
             if (swTicked > swToTick)
             {
@@ -195,40 +187,6 @@ namespace clockUIFinal
 
 
         }
-
-/*
-        public void StopwatchTimer_Tick(object sender, object e)
-        {
-            //DateTimeOffset startwatchtimer;
-            DateTimeOffset stopwatchtimer;
-            TimeSpan timertotal; 
-            // Timertimer.Text = DateTime.ToString("h:mm:ss tt");
-           // DateTimeOffset active = previous;
-            DateTimeOffset present = DateTimeOffset.Now;
-            //TimeSpan span = active - present;
-            TimeSpan elapsed = present - starttimernow;
-
-           // previous = present;
-
-
-
-            swTicked++;
-
-            //Timertimer.Text = "Time:  %s  PM " + elapsed.ToString(); //test will edit
-
-            if (swTicked > swToTick)
-            {
-                stopwatchtimer = present;
-
-                StopwatchTimer.Stop();
- 
-                timertotal = stopwatchtimer - starttimernow;
-
-                Timertimer.Text = "Total Time: " + timertotal.ToString(); // for debugging
-
-            }
-        }
-        */
 
         private async void ListAvailablePorts()
             {
@@ -463,35 +421,28 @@ namespace clockUIFinal
             private void Startdebug_Click(object sender, RoutedEventArgs e)
             {
                 //DispatcherTimerSetup(); //Start debugging on button click
-
+                swTicked = swToTick + 1; //stop timer function
                 DateTimeOffset startTime = DateTimeOffset.Now;
              }
 
             private void Startstopwatch_Click(object sender, RoutedEventArgs e)
             {
-            swTicked = swToTick + 1; //stop timer function
-            DateTimeOffset stopwatchtimer = DateTimeOffset.Now;
-            Boolean toggleBit = true;
-            StopwatchTimer_Setup(); //Start timer on button click start timer
-            
-
-           // DateTimeOffset startwatchtimer = DateTimeOffset.Now;
-               // DateTimeOffset stopwatchtimer = DateTimeOffset.Now;
+                swTicked = swToTick + 1; //stop timer function
+                DateTimeOffset stopwatchtimer = DateTimeOffset.Now;
+                Boolean toggleBit = true;
+                StopwatchTimer_Setup(); //Start timer on button click start timer
              }
 
 
             private void Stopstopwatch_Click(object sender, RoutedEventArgs e)
             {
-            swTicked = swToTick + 1; //stop timer function
-            DateTimeOffset stopwatchtimer = DateTimeOffset.Now;
-                
+                swTicked = 1; //stop timer function
              }
 
             private void StopDebug_Click(object sender, RoutedEventArgs e)
             {
-               swTicked = swToTick + 1; //stop timer function
-            DateTimeOffset stopTime = DateTimeOffset.Now;
-
+               swTicked = 1; //stop timer function
+               DateTimeOffset stopTime = DateTimeOffset.Now;
              }
 
             private void ButtonDisconnect_Click(object sender, RoutedEventArgs e)
@@ -505,7 +456,6 @@ namespace clockUIFinal
                 {
                     Alarmset.Text = "Timer done";
                     AlarmTime.Text = "Alarm! Buzz!";
-                    //DateTimeOffset stopwatchtimer = DateTimeOffset.Now;
 
                 }
             }
