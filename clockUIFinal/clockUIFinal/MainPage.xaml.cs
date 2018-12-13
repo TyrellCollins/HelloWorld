@@ -41,6 +41,7 @@ namespace clockUIFinal
 
         public MainPage()
         {
+            int packetsRec;
             this.InitializeComponent();
             listOfDevices = new ObservableCollection<DeviceInformation>();
             ListAvailablePorts();
@@ -48,7 +49,27 @@ namespace clockUIFinal
             Timer.Tick += Timer_Tick;
             Timer.Interval = new TimeSpan(0, 0, 1); //1 second interval
             Timer.Start(); //start timer
-            string currentPacket;
+            String currentPacket;
+
+            if (returncurrentPacketConverted == currentPacketConverted)
+            {
+                verifiedRx++;
+               
+                   packetsRec = Convert.ToInt32(verifiedRx);
+               // txtverifiedRx.Text = packetsRec;
+
+
+            }
+
+            else
+            {
+                packetsLost++;
+                loststring = Convert.ToString(packetsLost);
+                txtnumPacketslost.Text = loststring;
+                //txtnumPacketslost.Text = convertedPacketslost;
+            }
+            
+
         }
 
         int timesTicked, swTicked = 1;
@@ -141,7 +162,12 @@ namespace clockUIFinal
                 }
             }
         }
-    
+
+        private void TxtnumPacketslost_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         public void StopwatchTimer_Setup()
         {
             StopwatchTimer = new DispatcherTimer();
@@ -256,7 +282,6 @@ namespace clockUIFinal
         private async Task ReadData(CancellationToken cancellationToken)
             {
                 Task<UInt32> loadAsyncTask;
-
                 int calChkSum = 0;
                 int recChkSum = 0;
                 int an0, an1, an2, an3, an4, an5;
@@ -326,27 +351,17 @@ namespace clockUIFinal
                                         txtRval.Text = AnalogCalc.GetRed(an1);
                                         txtGval.Text = AnalogCalc.GetGreen(an2);
                                         txtBval.Text = AnalogCalc.GetBlue(an3);
+
                                          txtLightvalue.Text = AnalogCalc.LightDetect(an4);
                                         txtTogglev.Text = AnalogCalc.BuzzerToggle(an5);
-/*                                    returncurrentPacketConverted = Convert.ToInt32(currentPacket);
-
-                                    if (returncurrentPacketConverted == currentPacketConverted)
+                                  /*  returncurrentPacketConverted = Convert.ToInt32(currentPacket);
+                                    if (recChkSum == calChkSum)
                                     {
-                                        verifiedRx++;
-                                    }
+                                        returncurrentPacketConverted = Convert.ToInt32(currentPacket);
 
-                                    else
-                                        {
-                                        packetsLost++;
-                                        loststring = Convert.ToString(packetsLost);
-                                        txtnumPacketslost.Text = loststring;
-                                        //txtnumPacketslost.Text = convertedPacketslost;
-                                    }
+                                   
                                     */
-                                    
-                                }
-
-
+ }
                                 received = "";
                                 }
 
@@ -419,22 +434,22 @@ namespace clockUIFinal
 
         private void Startdebug_Click(object sender, RoutedEventArgs e)
         { }
-
-            /*
-                private void Startdebug_Click(object sender, RoutedEventArgs e)
+        /*
+            private void Startdebug_Click(object sender, RoutedEventArgs e)
+            {
+              debugActive = true; 
+                if (debugActive == true)
                 {
-                  debugActive = true; 
-                    if (debugActive == true)
-                    {
-                        DispatcherTimerSetup(); //Start debugging on button click
-                        swTicked = swToTick + 1; //stop timer function
-                        DateTimeOffset startTime = DateTimeOffset.Now;
-                    DebugConsole.Text = " Elapsed Time:  " + timertotal.ToString(); // for debugging
-                    }
-                 }
+                    DispatcherTimerSetup(); //Start debugging on button click
+                    swTicked = swToTick + 1; //stop timer function
+                    DateTimeOffset startTime = DateTimeOffset.Now;
+                DebugConsole.Text = " Elapsed Time:  " + timertotal.ToString(); // for debugging
+                }
+             }
 
-        */
-            private void Startstopwatch_Click(object sender, RoutedEventArgs e)
+    */
+
+        private void Startstopwatch_Click(object sender, RoutedEventArgs e)
         {
             debugActive = false;
             if (debugActive == false)

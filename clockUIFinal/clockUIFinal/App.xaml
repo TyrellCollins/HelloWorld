@@ -77,6 +77,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="bindToRGB" TargetType="Shape">
+            <Setter Property="Stroke" Value="{ThemeResource SystemControlForegroundListLowBrush}"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+        </Style>
     </Application.Resources>
 
 </Application>

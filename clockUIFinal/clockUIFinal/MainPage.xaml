@@ -68,12 +68,12 @@
                            Margin="10,10,0,0"/>
                 <TextBlock x:Name="txtPacketsReceivedprint" Text="Packets Received" 
                            Margin="30,10,0,0"/>
-                <TextBlock x:Name="txtnumPacketslost" Text="Number2" 
-                           Margin="10,10,0,0"/>
+                <TextBlock x:Name="txtverifiedRx" Text="Number2" 
+                           Margin="10,10,0,0" SelectionChanged="TxtnumPacketslost_SelectionChanged"/>
                 
                 <TextBlock x:Name="txtPacketslost" Text="Packets Lost" 
                            Margin="30,10,0,0"/>
-                <TextBlock x:Name="txtnumPacketslost1" Text="Number2" 
+                <TextBlock x:Name="txtnumPacketslost" Text="Number2" 
                            Margin="10,10,0,0"/>
                 <TextBlock x:Name="txtErrorRate" Text="Error Rate" 
                            Margin="30,10,0,0"/>
@@ -91,6 +91,7 @@
             <TextBlock x:Name="Instructions1" Text="Enter time for alarm in this format:"  TextWrapping=" Wrap" Width="250" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,0"/>
             <TextBlock x:Name="Instructions2" Text="HH:MM:SS TT   {Hour:Minute:Second Am/PM}"  TextWrapping=" Wrap" Width="300" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,5"/>
             <TextBox x:Name="Alarmset" HorizontalAlignment="Left" Text="Enter time here" Margin="30,5,0,5" Width="180" Padding="0,0,0,0" Height="35" FontFamily="Segoe UI"/>
+            <Ellipse HorizontalAlignment="Stretch" Height="50" Margin="0,401,0,0" VerticalAlignment="Stretch" Width="50" CompositeMode="Inherit" Style="{StaticResource bindToRGB}"/>
         </StackPanel>
 
         <StackPanel x:Name="AlarmPanel" Orientation="Horizontal" HorizontalAlignment="Left" Width="290" VerticalAlignment="Stretch" Height="30" Margin="30,-190,0,5">
