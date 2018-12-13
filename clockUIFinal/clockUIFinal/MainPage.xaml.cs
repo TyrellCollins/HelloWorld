@@ -17,6 +17,7 @@ namespace clockUIFinal
     {
         private SerialDevice serialPort = null;
         private SolarCalc solarCalc = new SolarCalc(); //will need to modify
+        private AnalogCalc AnalogCalc = new AnalogCalc(); //will need to modify
 
         DataWriter dataWriterObject = null;
         DataReader dataReaderObject = null;
@@ -32,8 +33,11 @@ namespace clockUIFinal
         DateTimeOffset startTime, stopTime, lastTime, previous, starttimernow, stopwatchtimer;
         TimeSpan elapsed, span, timertotal;
         Boolean toggleBit, debugActive;
+        int returncurrentPacketConverted, convertedPacketslost, VerifiedRx;
 
+        string loststring;
         string received = "";
+        int currentPacketConverted, pastPacketConverted, packetsLost, verifiedRx;
 
         public MainPage()
         {
@@ -44,6 +48,7 @@ namespace clockUIFinal
             Timer.Tick += Timer_Tick;
             Timer.Interval = new TimeSpan(0, 0, 1); //1 second interval
             Timer.Start(); //start timer
+            string currentPacket;
         }
 
         int timesTicked, swTicked = 1;
@@ -113,6 +118,9 @@ namespace clockUIFinal
             {
                 Timertimer.Text = "Debugging"; //test will edit
             }
+
+            string currentPacket = txtPacketNum.Text;
+
 
             swTicked++;
 
@@ -271,7 +279,16 @@ namespace clockUIFinal
                     {
                         if (received.Length > 3)
                         {
-                            if (received[2] == '#')
+
+
+                        /* string currentPacket = txtPacketNum.Text;
+                        // ConvertTo (currentPacket);
+                        pastPacketConverted = currentPacketConverted;
+                        currentPacket = txtPacketNum.Text; 
+                         currentPacketConverted = Convert.ToInt32(currentPacket);
+                        */
+
+                        if (received[2] == '#')
                             {
                                 //txtReceived.Text = received;
                                 if (received.Length > 42)
@@ -304,16 +321,33 @@ namespace clockUIFinal
                                     calChkSum %= 1000;
                                     if (recChkSum == calChkSum)
                                     {
-                                        txtSolarVolt.Text = solarCalc.GetSolarVoltage(an0);
-                                        txtBatteryVolt.Text = solarCalc.GetBatteryVoltage(an2);
-                                        txtBatteryCurrent.Text = solarCalc.GetBatteryCurrent(an1, an2);
-                                        txtLED1current.Text = solarCalc.GetLEDcurrent(an4, an1);
-                                        txtLED2current.Text = solarCalc.GetLEDcurrent(an3, an1);
 
+                                    txtBuzzerval.Text = AnalogCalc.GetBuzzer(an0);
+                                        txtRval.Text = AnalogCalc.GetRed(an1);
+                                        txtGval.Text = AnalogCalc.GetGreen(an2);
+                                        txtBval.Text = AnalogCalc.GetBlue(an3);
+                                         txtLightvalue.Text = AnalogCalc.LightDetect(an4);
+                                        txtTogglev.Text = AnalogCalc.BuzzerToggle(an5);
+/*                                    returncurrentPacketConverted = Convert.ToInt32(currentPacket);
+
+                                    if (returncurrentPacketConverted == currentPacketConverted)
+                                    {
+                                        verifiedRx++;
                                     }
 
+                                    else
+                                        {
+                                        packetsLost++;
+                                        loststring = Convert.ToString(packetsLost);
+                                        txtnumPacketslost.Text = loststring;
+                                        //txtnumPacketslost.Text = convertedPacketslost;
+                                    }
+                                    */
+                                    
+                                }
 
-                                    received = "";
+
+                                received = "";
                                 }
 
                             }
@@ -383,19 +417,24 @@ namespace clockUIFinal
                 AlarmTime.Text = "Alarm set for: " + Alarmset.Text;
              }
 
-            private void Startdebug_Click(object sender, RoutedEventArgs e)
-            {
-              debugActive = true; 
-                if (debugActive == true)
-                {
-                    DispatcherTimerSetup(); //Start debugging on button click
-                    swTicked = swToTick + 1; //stop timer function
-                    DateTimeOffset startTime = DateTimeOffset.Now;
-                DebugConsole.Text = " Elapsed Time:  " + timertotal.ToString(); // for debugging
-                }
-             }
+        private void Startdebug_Click(object sender, RoutedEventArgs e)
+        { }
 
-        private void Startstopwatch_Click(object sender, RoutedEventArgs e)
+            /*
+                private void Startdebug_Click(object sender, RoutedEventArgs e)
+                {
+                  debugActive = true; 
+                    if (debugActive == true)
+                    {
+                        DispatcherTimerSetup(); //Start debugging on button click
+                        swTicked = swToTick + 1; //stop timer function
+                        DateTimeOffset startTime = DateTimeOffset.Now;
+                    DebugConsole.Text = " Elapsed Time:  " + timertotal.ToString(); // for debugging
+                    }
+                 }
+
+        */
+            private void Startstopwatch_Click(object sender, RoutedEventArgs e)
         {
             debugActive = false;
             if (debugActive == false)
@@ -415,17 +454,21 @@ namespace clockUIFinal
                 swTicked = 1; //stop timer function
             }
         }
-        private void StopDebug_Click(object sender, RoutedEventArgs e)
-        {
-            if (debugActive == true)
-            {
-                DateTimeOffset stopTime = DateTimeOffset.Now;
-                swTicked = 1; //stop timer function
-                
-                debugActive = false;
-            }
-        }
 
+        private void StopDebug_Click(object sender, RoutedEventArgs e)
+        { }
+            /*
+            private void StopDebug_Click(object sender, RoutedEventArgs e)
+            {
+                if (debugActive == true)
+                {
+                    DateTimeOffset stopTime = DateTimeOffset.Now;
+                    swTicked = 1; //stop timer function
+
+                    debugActive = false;
+                }
+            }
+            */
             private void ButtonDisconnect_Click(object sender, RoutedEventArgs e)
             {
                 //place holder
