@@ -18,7 +18,7 @@
                 <Button x:Name="ButtonConnectToDevice" Content="Connect to device"
                     Margin="10,10,0,0" Click = "ButtonConnectToDevice_Click"/>
                 <Button x:Name="ButtonWrite" Content="Write" Margin="10,10,0,0" Click="ButtonWrite_Click"/>
-                <Button x:Name="ButtonDisconnect" Content="Disconnect" Margin="10,10,0,0" Click="ButtonDisconnect_Click"/>
+                <Button x:Name="ButtonDisconnect" Content="Abort" Margin="10,10,0,0" Click="ButtonDisconnect_Click"/>
             </StackPanel>
             <TextBlock Text="Select a Serial Device:" Margin="20,0,0,0"/>
             <ListBox x:Name="lstSerialDevices" Height="100" Margin="10,0,30,0" Padding="0,0,30,0">
@@ -66,7 +66,7 @@
                            Margin="40,10,0,0"/>
                 <TextBlock x:Name="txtPacketNum" Text="Number" 
                            Margin="10,10,0,0"/>
-                <TextBlock x:Name="txtPacketsReceivedprint" Text="Packets Received" 
+              <!--  <TextBlock x:Name="txtPacketsReceivedprint" Text="Packets Received" 
                            Margin="30,10,0,0"/>
                 <TextBlock x:Name="txtverifiedRx" Text="Number2" 
                            Margin="10,10,0,0" SelectionChanged="TxtnumPacketslost_SelectionChanged"/>
@@ -79,7 +79,7 @@
                            Margin="30,10,0,0"/>
                 <TextBlock x:Name="txtnumErrorRate" Text="Number3" 
                            Margin="10,10,0,0"/>
-                
+                -->
             </StackPanel>
         </StackPanel>
 
@@ -91,7 +91,6 @@
             <TextBlock x:Name="Instructions1" Text="Enter time for alarm in this format:"  TextWrapping=" Wrap" Width="250" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,0"/>
             <TextBlock x:Name="Instructions2" Text="HH:MM:SS TT   {Hour:Minute:Second Am/PM}"  TextWrapping=" Wrap" Width="300" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,5"/>
             <TextBox x:Name="Alarmset" HorizontalAlignment="Left" Text="Enter time here" Margin="30,5,0,5" Width="180" Padding="0,0,0,0" Height="35" FontFamily="Segoe UI"/>
-            <Ellipse HorizontalAlignment="Stretch" Height="50" Margin="0,401,0,0" VerticalAlignment="Stretch" Width="50" CompositeMode="Inherit" Style="{StaticResource bindToRGB}"/>
         </StackPanel>
 
         <StackPanel x:Name="AlarmPanel" Orientation="Horizontal" HorizontalAlignment="Left" Width="290" VerticalAlignment="Stretch" Height="30" Margin="30,-190,0,5">

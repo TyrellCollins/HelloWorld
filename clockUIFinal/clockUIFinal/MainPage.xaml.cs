@@ -8,6 +8,8 @@ using Windows.Devices.SerialCommunication;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using static Windows.UI.Color;
+
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,7 +30,7 @@ namespace clockUIFinal
         DispatcherTimer Timer = new DispatcherTimer(); //create new instance of dispatch timer
         DispatcherTimer StopwatchTimer = new DispatcherTimer(); //create new instance of dispatch timer
 
-      //Create structs required for dispatch timer to function
+        //Create structs required for dispatch timer to function
         DispatcherTimer dispatcherTimer, stopwatchtime;
         DateTimeOffset startTime, stopTime, lastTime, previous, starttimernow, stopwatchtimer;
         TimeSpan elapsed, span, timertotal;
@@ -51,29 +53,30 @@ namespace clockUIFinal
             Timer.Start(); //start timer
             String currentPacket;
 
-            if (returncurrentPacketConverted == currentPacketConverted)
+            if (recChkSum == calChkSum)
             {
                 verifiedRx++;
-               
-                   packetsRec = Convert.ToInt32(verifiedRx);
+                packetsRec = Convert.ToInt32(verifiedRx);
                // txtverifiedRx.Text = packetsRec;
+         }
 
-
-            }
-
-            else
-            {
-                packetsLost++;
-                loststring = Convert.ToString(packetsLost);
-                txtnumPacketslost.Text = loststring;
-                //txtnumPacketslost.Text = convertedPacketslost;
-            }
+                else
+                {
+                    packetsLost++;
+                    loststring = Convert.ToString(packetsLost);
+                   // txtnumPacketslost.Text = loststring;
+                    //txtnumPacketslost.Text = convertedPacketslost;
+                }
             
-
         }
+    
 
         int timesTicked, swTicked = 1;
         int timesToTick, swToTick = 100000000; // only necessary if stopping time
+        private object textReceived;
+
+        public object recChkSum { get; private set; }
+        public object calChkSum { get; private set; }
 
         public void DispatcherTimerSetup()
         {
@@ -85,7 +88,7 @@ namespace clockUIFinal
             startTime = DateTimeOffset.Now;
 
             lastTime = startTime;
-            //DebugConsole.Text += "Calling dispatcherTimer.Start()\n";  //for debugging purposes
+            // DebugConsole.Text += "Calling dispatcherTimer.Start()\n";  //for debugging purposes
             dispatcherTimer.Start();
         }
 
@@ -102,17 +105,17 @@ namespace clockUIFinal
             {
                 stopTime = time;
 
-                //DebugConsole.Text += "Calling dispatcherTimer.Stop()\n";// for debugging end dispatch timer
+         //DebugConsole.Text += "Calling dispatcherTimer.Stop()\n";// for debugging end dispatch timer
 
                 dispatcherTimer.Stop();
                 //IsEnabled should now be false after calling stop
-                //DebugConsole.Text += "dispatcherTimer.IsEnabled = " + dispatcherTimer.IsEnabled + "\n"; // for debugging
+        // DebugConsole.Text += "dispatcherTimer.IsEnabled = " + dispatcherTimer.IsEnabled + "\n"; // for debugging
 
                 span = stopTime - startTime;
 
-                //DebugConsole.Text = "Stop Time: " + span.ToString(); // for debugging
+        //DebugConsole.Text = "Stop Time: " + span.ToString(); // for debugging
 
-                //DebugConsole.Text += "Total Time Start-Stop: " + span.ToString() + "\n"; // for debugging
+          // DebugConsole.Text += "Total Time Start-Stop: " + span.ToString() + "\n"; // for debugging
             }
         }
 
@@ -141,7 +144,6 @@ namespace clockUIFinal
             }
 
             string currentPacket = txtPacketNum.Text;
-
 
             swTicked++;
 
@@ -264,7 +266,6 @@ namespace clockUIFinal
                     //received = "";
 
                     //if (ex.GetType.Name=="TaskCancelledException")
-
                 }
                 finally
                 {
@@ -357,9 +358,7 @@ namespace clockUIFinal
                                   /*  returncurrentPacketConverted = Convert.ToInt32(currentPacket);
                                     if (recChkSum == calChkSum)
                                     {
-                                        returncurrentPacketConverted = Convert.ToInt32(currentPacket);
-
-                                   
+                                        returncurrentPacketConverted = Convert.ToInt32(currentPacket);                 
                                     */
  }
                                 received = "";
@@ -433,10 +432,12 @@ namespace clockUIFinal
              }
 
         private void Startdebug_Click(object sender, RoutedEventArgs e)
-        { }
+        {
+            DebugConsole.Text = " Elapsed Time:  " + timertotal.ToString(); // for debugging
+
+        }
         /*
-            private void Startdebug_Click(object sender, RoutedEventArgs e)
-            {
+           
               debugActive = true; 
                 if (debugActive == true)
                 {
@@ -444,8 +445,7 @@ namespace clockUIFinal
                     swTicked = swToTick + 1; //stop timer function
                     DateTimeOffset startTime = DateTimeOffset.Now;
                 DebugConsole.Text = " Elapsed Time:  " + timertotal.ToString(); // for debugging
-                }
-             }
+                }           
 
     */
 
@@ -473,8 +473,7 @@ namespace clockUIFinal
         private void StopDebug_Click(object sender, RoutedEventArgs e)
         { }
             /*
-            private void StopDebug_Click(object sender, RoutedEventArgs e)
-            {
+           
                 if (debugActive == true)
                 {
                     DateTimeOffset stopTime = DateTimeOffset.Now;
@@ -482,14 +481,15 @@ namespace clockUIFinal
 
                     debugActive = false;
                 }
-            }
+            
             */
             private void ButtonDisconnect_Click(object sender, RoutedEventArgs e)
             {
-                //place holder
-            }
-        
-        }// end main page
+            //textReceived.Text = "";
+            //lstSerialDevices.Text = "";          
+        }
+
+    }// end main page
     
-    }//end clockui
+}//end clockui
 
